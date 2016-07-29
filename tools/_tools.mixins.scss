@@ -76,12 +76,20 @@
 //   @include inuit-clearfix();
 // }
 
-@mixin inuit-clearfix() {
+@mixin inuit-clearfix($important: false) {
+
+  @if ($important == true) {
+    $important: !important;
+  } @elseif ($important == false) {
+    $important: null;
+  } @else {
+    @error "`#{$important}` needs to be `true` or `false`."
+  }
 
   &:after {
-    content: "" !important;
-    display: block !important;
-    clear: both !important;
+    content: "" $important;
+    display: block $important;
+    clear: both $important;
   }
 
 }
